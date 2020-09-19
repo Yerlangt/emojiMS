@@ -1,0 +1,36 @@
+{% extends "base1.html" %}
+
+{% block content %}
+    <title>Авторизация</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <form class="form-signin" method="POST" novalidate>
+        <center>
+        <font size = "6">Авторизация</font>
+        </center>
+        {{ form.hidden_tag() }}
+        <p>
+            <br>
+            {{ form.email(class="form-control", type="email", placeholder="Почта") }}<br>
+            {% for error in form.email.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endfor %}
+        </p>
+        <p>
+            <br>
+            {{ form.password(class="form-control input-group", type="password", placeholder="Пароль") }}<br>
+            {% for error in form.password.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endfor %}
+        </p>
+        <h1>____________________</h1>
+        <center>
+        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+        <p>{{ form.submit(type="submit", class="btn btn-primary" ) }}</p>
+        </center>
+        <div>{{ message }}</div>
+    </form>
+{% endblock %}

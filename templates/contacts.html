@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% extends "base.html" %}
+    {% block head %}
+    {{ super() }}
+    <title>{{title}}</title>
+    {% endblock %}
+
+    </head>
+	
+<body>
+{% block content %}
+{{ super() }}
+
+<section class="content">
+
+<h2 style="color: #fff;"> My contacts </h2>
+<br>
+<br>
+{% for item in users%}
+<div class="user">
+<div class="user-icon">
+<img src="/static/img/user.png"
+						 alt="Open Library logo" height=64 width=64/>
+</div>
+<div class="user-info">
+{{item.name}} {{item.surname}}
+</div>
+<div class="user-btn">
+<a href="/contact/{{item.id}}" class="btn btn-success btn-lg active btn-sm" role="button" aria-pressed="true">Open dialog</a>
+</div>
+</div>
+{% endfor %}
+<section>
+
+{% endblock %}
+</body>
+</html>

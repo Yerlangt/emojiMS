@@ -1,0 +1,67 @@
+{% extends "base1.html" %}
+
+{% block content %}
+<title>Регистрация</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<form action="" method="post">
+    <center>
+        <font size = "6">Регистрация</font>
+    </center>
+    {{ form.hidden_tag() }}
+    {{ form.csrf_token }}
+    
+    <p>
+        <br>
+        {{ form.surname(class="form-control", placeholder="Фамилия") }}<br>
+        {% for error in form.surname.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        <br>
+        {{ form.name(class="form-control", placeholder="Имя") }}<br>
+        {% for error in form.name.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    
+    
+  
+    <p>
+        <br>
+        {{ form.email(class="form-control", type="email", placeholder="Почта") }}<br>
+        {% for error in form.email.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        <br>
+        {{ form.password(class="form-control", type="password", placeholder="Пароль") }}<br>
+        {% for error in form.password.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        <br>
+        {{ form.password_again(class="form-control", type="password", placeholder="Повторите Пароль") }}<br>
+        {% for error in form.password_again.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <center>
+    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+    <!-- <button type="button" class="btn btn-primary">У меня уже есть аккаунт</button> -->
+    </center>
+    {{message}}
+</form>
+{% endblock %}

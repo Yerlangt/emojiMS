@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% extends "base.html" %}
+    {% block head %}
+    {{ super() }}
+	<meta charset="utf-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <meta name="description" content="">
+     <meta name="author" content="">
+     <link rel="icon" href="../../favicon.ico">
+    <title>{{title}}</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+
+     <script src="{{ url_for('static', filename='script.js') }}"></script>
+		{% endblock %}  
+    </head>
+	
+<body>
+{% block content %}
+{{ super() }}
+<section class="content">
+
+
+
+
+
+<div class="dialog-head">
+
+ 
+<div class="card-header msg_head">
+							<div class="d-flex bd-highlight">
+								<div class="img_cont">
+									<img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
+									<span class="online_icon"></span>
+								</div>
+								<div class="user_info">
+									<span>Chat with  {{friend.surname}} {{friend.name}}</span>
+									<p>10 Messages</p>
+								</div>
+								<div class="video_cam">
+									<span><i class="fas fa-video"></i></span>
+									<span><i class="fas fa-phone"></i></span>
+								</div>
+							</div>
+							<span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
+							<div class="action_menu">
+								<ul>
+									<li><i class="fas fa-user-circle"></i> View profile</li>
+									<li><i class="fas fa-users"></i> Add to close friends</li>
+									<li><i class="fas fa-plus"></i> Add to group</li>
+									<li><i class="fas fa-ban"></i> Block</li>
+								</ul>
+							</div>
+						</div>
+ </div>
+ 
+ 
+ <div class="card-body msg_card_body">
+</div>
+ 
+ 
+ 
+
+<div class="container">
+
+         <form class="form-signin" action="/sendMessage" method="post" role="form">
+             
+             <input type="text" name="message" placeholder="Type your message" class="form-control">
+
+             <button class="btn btn-lg btn-primary btn-block btn-send" type="button">Send </button>
+			 
+         </form>
+<div class="translate-buttons">
+<div style="margin-left:180px">
+<button class="btn btn-lg btn-success btn-block btn-emoji btn-sm" type="button" style="">Convert Text to Emoji</button> </div>
+<div style="flex:right;">
+<button class="btn btn-lg btn-success btn-block btn-translate btn-sm" type="button" style="margin-top: .1rem; ">Convert Emoji to Text</button></div>
+     </div>
+	 </div>
+<script>
+
+$(function() {
+    $(document.body.getElementsByClassName("btn-emoji")[0]).click(function() {
+        $.ajax({
+            url: '/translateMessage',
+            data: $('form').serialize(),
+            type: 'POST',
+            success: function(response) {
+				             window.location.reload();
+							  
+				
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+});
+
+</script>
+<script>
+
+$(function() {
+    $(document.body.getElementsByClassName("btn-translate")[0]).click(function() {
+        $.ajax({
+            url: '/translateEmoji',
+            data: $('form').serialize(),
+            type: 'POST',
+            success: function(response) {
+				             window.location.reload();
+							  
+				
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+});
+
+</script>
+</section>
+<script>
+$(function() {
+        $.ajax({
+            url: '/uploud',
+            data: $('form').serialize(),
+            type: 'POST',
+            success: function(response) {
+				              const data = JSON.parse(response);
+							  var history = data['history'];
+							  history.forEach(function(item, i, arr) {
+							  if (item[0] == data['id']){
+							  var dialog = document.body.getElementsByClassName("card-body")[0];
+							  dialog.innerHTML += '<div class="d-flex justify-content-end mb-4"><div class="msg_cotainer_send">' + item[1] + '<span class="msg_time_send">8:55</span></div>';
+								}else{
+							  var dialog = document.body.getElementsByClassName("card-body")[0];
+							  dialog.innerHTML += '<div class="d-flex justify-content-start mb-4"><div class="msg_cotainer_send">' + item[1] + '<span class="msg_time_send">8:55</span></div>';
+								
+							
+							  }
+});
+				
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+});
+</script>
+
+{% endblock %}
+</body>
+</html>

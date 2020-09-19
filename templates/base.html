@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}"/>
+	
+    <title>{{title}}</title>
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<div class="logo-component">
+			<a href="/" title="The Internet Archive's Open Library: One page for every book">
+				<div class="logo-txt">
+					<img src="/static/img/logo.png"
+						 alt="Open Library logo" height=32 width=32/>
+				</div>
+			</a>
+	</div>
+	<div style="width: 15px;"> </div>
+    <a class="navbar-brand" href="/">Welcome to EmojiMS</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+	
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                {% if current_user.is_authenticated%}
+                <a class="nav-link" href="/contacts">My Contacts</a>
+                {% else %}
+                <a class="nav-link" href="/login">My Contacts</a>
+                {% endif %}
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link " href="/about">About</a>
+
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search">
+            <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+		
+		<ul class="navbar-nav mr-auto mt-2 mt-lg-0" style="margin-right: 0px; margin-left:50px;">
+		{% if current_user.is_authenticated %}
+            <li class="nav-item active">
+                <a class="nav-link" href="/logout">{{ current_user.name }} <span class="sr-only">(current)</span></a>
+            </li>
+		{% else %}
+            <li class="nav-item active">
+                <a class="nav-link" href="/login">Log In</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link " href="/register">Sign Up</a>
+            </li>
+		{% endif %}
+        </ul>
+    </div>
+	
+</nav>
+
+
+
+
+{% endblock %}
+
+</body>
+</html>

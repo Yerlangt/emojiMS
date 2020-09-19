@@ -1,0 +1,14 @@
+html {
+  font-size: 11px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.container {
+  max-width: 360px;
+}
+
+input { margin-bottom: -55px; }
