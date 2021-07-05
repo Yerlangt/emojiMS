@@ -1,5 +1,7 @@
 # EmojiMS
 
+Web messenger on Flask
+
 ![image](https://user-images.githubusercontent.com/51825464/124468442-8af28980-ddb2-11eb-98f2-69a38453fcbd.png)
 
 ![image](https://user-images.githubusercontent.com/51825464/124468432-862dd580-ddb2-11eb-9f2a-f590bac983b3.png)
